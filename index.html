@@ -7,14 +7,15 @@
   </head>
   <body>
     <main>
+
       <div class="video-player">
         <video id="video-screen">
           <source src="video/video.mp4" type="video/mp4">
           <source src="video/video.ogg" type="video/ogg">
-          <track label="English" kind="subtitles" srclang="en" src="video/captions.vtt"></track>
+          <track label="English" kind="subtitles" srclang="en" src="video/captions.vtt">
         </video>
         <div class="video-controls">
-          <progress id="video-progress-bar" min="0" max="100" value="0"></progress>
+          <progress id="video-progress-bar" max="100" value="0"></progress>
           <div id="video-buttons">
             <button id="btn-play-pause"></button>
             <span id="display-play-time"></span>
@@ -24,13 +25,11 @@
         </div>
       </div>
 
-      <p><span>Now that we've looked at the architecture of the internet, let's see how you might </span><span>connect your personal devices to the internet inside your house. </span><span>Well there are many ways to connect to the internet, and </span><span>most often people connect wirelessly. </span><span>Let's look at an example of how you can connect to the internet. </span></p>
+      <section id="captions">
+      </section>
 
-      <p><span>If you live in a city or a town, you probably have a coaxial cable for </span><span>cable Internet, or a phone line if you have DSL, running to the outside of </span><span>your house, that connects you to the Internet Service Provider, or ISP. </span><span class="active">If you live far out in the country, you'll more likely have </span><span>a dish outside your house, connecting you wirelessly to your closest ISP, or </span><span>you might also use the telephone system. </span></p>
-
-      <p><span>Whether a wire comes straight from the ISP hookup outside your house, or </span><span>it travels over radio waves from your roof, </span><span>the first stop a wire will make once inside your house, is at your modem. </span><span>A modem is what connects the internet to your network at home. </span><span>A few common residential modems are DSL or ... </span></p>
     </main>
-
-    <script type="text/javascript" src="js\app.js"></script>
+    <script type="text/javascript" src="js/data.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

@@ -1,12 +1,27 @@
 // Color variables
-
 $color-white   :   #ffffff;
 $color-black   :   #333333;
 $color-grey    :   #666666;
 $color-orange  :   #ff9900;
 $color-transparent-white  : rgba(255, 255, 255, 0.2);
+$color-transparent-black  : rgba(0, 0, 0, 0.1);
 
 
 
 // Font stacks
 $font-main  :     Helvetica, Arial, sans-serif;
+
+
+
+// General styling
+p {
+  font-family: $font-main;
+  font-weight: lighter;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $color-grey;
+}
+
+.active {
+  color: orange;
+}
