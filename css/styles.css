@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box; }
+
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Change the default font family in all browsers (opinionated).
@@ -372,9 +375,82 @@ video {
   width: 100%;
   max-width: 100%; }
 
+.video-player {
+  position: relative;
+  overflow: hidden; }
+  .video-player:hover .video-controls {
+    transform: translateY(0);
+    opacity: 1; }
+    .video-player:hover .video-controls #video-buttons {
+      opacity: 1; }
+  .video-player .video-controls {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0 8px;
+    bottom: 4px;
+    transform: translateY(60px);
+    transition: ease-out all .3s; }
+    .video-player .video-controls #video-screen {
+      margin: 0 auto;
+      padding: 0; }
+    .video-player .video-controls #video-progress-bar {
+      width: 100%;
+      height: 10px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.2); }
+      .video-player .video-controls #video-progress-bar::-webkit-progress-bar {
+        background-color: rgba(255, 255, 255, 0.2); }
+      .video-player .video-controls #video-progress-bar::-webkit-progress-value {
+        background-color: #ff9900; }
+      .video-player .video-controls #video-progress-bar::-moz-progress-bar {
+        background-color: #ff9900; }
+    .video-player .video-controls #video-buttons {
+      width: 100%;
+      display: flex;
+      opacity: 0;
+      transition: ease-in all .3s; }
+    .video-player .video-controls button {
+      display: inline-block;
+      margin: 8px;
+      padding: 0;
+      border: 0;
+      width: 48px;
+      height: 48px;
+      cursor: pointer; }
+      .video-player .video-controls button:focus {
+        outline-color: transparent;
+        outline-style: none; }
+      .video-player .video-controls button:active {
+        color: white; }
+    .video-player .video-controls #btn-play-pause {
+      background: url("../icons/play-icon.png") center center no-repeat; }
+      .video-player .video-controls #btn-play-pause.playing {
+        background-image: url("../icons/pause-icon.png"); }
+    .video-player .video-controls #btn-mute-toggle {
+      background: url("../icons/volume-on-icon.png") center center no-repeat; }
+      .video-player .video-controls #btn-mute-toggle.muted {
+        background-image: url("../icons/volume-off-icon.png"); }
+    .video-player .video-controls #btn-full-screen {
+      background: url("../icons/fullscreen-icon.png") center center no-repeat; }
+    .video-player .video-controls #display-play-time {
+      align-self: center;
+      margin-right: auto;
+      margin-left: 10px;
+      color: #ffffff;
+      font-weight: lighter;
+      font-size: 14px; }
+
 p {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: lighter;
   font-size: 16px;
   line-height: 1.5;
   color: #666666; }
+
+.active {
+  color: orange; }
