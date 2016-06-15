@@ -86,6 +86,7 @@ var videoSeek = function(clickValue) {
   video.currentTime = clickValue / 100 * video.duration;
   if (video.paused) {
     video.play();
+    btnPlayPause.classList.add('playing');
   }
 }
 
