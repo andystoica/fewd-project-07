@@ -1,8 +1,4 @@
-@import 'base/normalize';
-@import 'base/variables';
-@import 'base/mixins';
-
-@import 'layout/layout';
-
-@import 'elements/video';
-@import 'elements/typography';
+@import 'normalize';
+@import 'general';
+@import 'layout';
+@import 'video';

@@ -8,6 +8,8 @@ var btnPlayPause = document.getElementById('btn-play-pause');
 var btnMuteToggle = document.getElementById('btn-mute-toggle');
 var btnFullScreen = document.getElementById('btn-full-screen');
 var displayTime = document.getElementById('display-play-time');
+var videoCaptions = document.getElementById('captions');
+
 
 
 
@@ -24,6 +26,64 @@ function formatTime(totalSeconds) {
   return output;
 }
 
+// Convert VTT time format string into number of seconds in float
+function VttToSeconds(vttString) {
+  var time   = vttString.split(":");
+  var hours  = parseFloat(time[0]);
+  var mins   = parseFloat(time[1]);
+  var secs   = parseFloat(time[2].replace(",", "."));
+  var output = hours * 3600 + mins * 60 + secs;
+
+  return output;
+}
+
+
+
+
+/**
+* Caption behavior
+**/
+
+// Renders the JSON data into appropriate HTML tags and
+// populates the page
+var renderCaptions = function(data) {
+  var output = '<p>';
+
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].hasOwnProperty('newParagraph')) {
+      output += '</p><p>';
+    }
+    output += '<span id="caption' + data[i].index + '">';
+    output += data[i].caption;
+    output += '</span>';
+  }
+
+  output += '</p>';
+  videoCaptions.innerHTML = output;
+};
+
+
+// Check if the caption is available for the specified time
+var isCaptionTime = function(caption, timeStamp) {
+  return VttToSeconds(caption.start) <= timeStamp && VttToSeconds(caption.end) >= timeStamp;
+};
+
+
+// Activates the correct caption for the specified time
+// Iterates through all avaialable captions and activates the correct one if found
+var activateCaption = function(data, time) {
+  for (var i = 0; i < data.length; i++) {
+    var span = document.getElementById('caption' + data[i].index);
+    if (isCaptionTime(data[i], time)) {
+      span.classList.add('active');
+    } else {
+      span.classList.remove('active');
+    }
+  }
+};
+
+
+
 
 
 /**
@@ -33,7 +93,8 @@ function formatTime(totalSeconds) {
 // Initialise the video Player
 var videoInit = function() {
   displayTime.innerHTML = formatTime(video.duration);
-}
+  renderCaptions(captions);
+};
 
 // Play / Pause behaviour
 var videoPlaybackToggle = function() {
@@ -45,7 +106,7 @@ var videoPlaybackToggle = function() {
     btnPlayPause.classList.remove('playing');
   }
 
-}
+};
 
 
 // Mute / Unmute behaviour
@@ -58,7 +119,7 @@ var videoMuteToggle = function() {
     btnMuteToggle.classList.remove('muted');
   }
 
-}
+};
 
 
 // Switched to full screen visualisation based on user agent
@@ -70,25 +131,26 @@ var videoFullScreen = function() {
   } else if (video.mozRequestFullScreen) {
     video.mozRequestFullScreen(); // Firefox
   }
-}
+};
 
 
 // Progress bar updates
 var videoUpdateProgress = function() {
   progressBar.value = Math.round(video.currentTime / video.duration * 100);
   displayTime.innerHTML = formatTime(video.currentTime) + " / " + formatTime(video.duration);
-}
+  activateCaption(captions, video.currentTime);
+};
 
 
 // Video seek jumps to a percentage value passed as the argument
 var videoSeek = function(clickValue) {
-  console.log(clickValue);
   video.currentTime = clickValue / 100 * video.duration;
   if (video.paused) {
     video.play();
     btnPlayPause.classList.add('playing');
   }
-}
+};
+
 
 
 
